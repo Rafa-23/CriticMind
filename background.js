@@ -1,10 +1,9 @@
 const API_ENDPOINT = 'https://api.deepseek.com/v1/chat/completions';
 
-// Message listener for content script requests
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'analyzeLink') {
     handleAnalysisRequest(request, sendResponse);
-    return true; // Keep message channel open for async response
+    return true;
   }
 });
 
@@ -24,14 +23,12 @@ async function handleAnalysisRequest(request, sendResponse) {
 }
 
 async function analyzeUrl(url) {
-  // Get API key from storage
   const { apiKey } = await chrome.storage.local.get(['apiKey']);
   
   if (!apiKey) {
     throw new Error('Please configure your API key in extension settings');
   }
 
-  // Construct the analysis prompt
   const prompt = `Analyze the content at this URL: ${url}
   - Provide a 3-sentence summary
   - Identify key entities/organizations
@@ -41,7 +38,6 @@ async function analyzeUrl(url) {
   
   Format response as markdown with bold headings. Max 150 words.`;
 
-  // Make API request
   const response = await fetch(API_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -73,7 +69,6 @@ async function analyzeUrl(url) {
 function handleApiError(errorData, statusCode) {
   const error = new Error(errorData.error?.message || 'API request failed');
   
-  // Classify error types
   switch (statusCode) {
     case 401:
       error.message = 'Invalid API key - update in extension settings';
