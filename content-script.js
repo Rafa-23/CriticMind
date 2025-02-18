@@ -3,7 +3,6 @@ let previewBox = null;
 let debounceTimer;
 let activeRequestController = null;
 
-// Create preview box element with styling
 function createPreviewBox() {
   previewBox = document.createElement('div');
   previewBox.id = 'deepseek-preview';
@@ -22,7 +21,6 @@ function createPreviewBox() {
   document.body.appendChild(previewBox);
 }
 
-// Cancel active fetch requests
 function cancelActiveRequest() {
   if (activeRequestController) {
     activeRequestController.abort();
@@ -72,13 +70,11 @@ document.addEventListener('mouseout', (event) => {
   }
 });
 
-// Position the preview box relative to cursor
 function positionPreviewBox(x, y) {
   previewBox.style.left = `${x + 15}px`;
   previewBox.style.top = `${y + 15}px`;
 }
 
-// Show loading animation
 function showLoadingState() {
   previewBox.style.display = 'block';
   previewBox.style.opacity = '1';
@@ -97,7 +93,6 @@ function showLoadingState() {
   `;
 }
 
-// Handle successful analysis response
 function handleAnalysisResponse(response) {
   if (response.error) {
     showErrorState(response.message, response.details, response.retryable);
@@ -106,7 +101,6 @@ function handleAnalysisResponse(response) {
   }
 }
 
-// Display formatted content
 function showContent(content) {
   previewBox.style.opacity = '1';
   previewBox.innerHTML = `
@@ -116,7 +110,6 @@ function showContent(content) {
   `;
 }
 
-// Display error state
 function showErrorState(message, details, retryable = true) {
   previewBox.innerHTML = `
     <div style="color: #dc2626; font-size: 0.9em;">
@@ -132,7 +125,6 @@ function showErrorState(message, details, retryable = true) {
   `;
 }
 
-// Hide preview box with fade-out
 function hidePreviewBox() {
   previewBox.style.opacity = '0';
   setTimeout(() => {
@@ -141,5 +133,4 @@ function hidePreviewBox() {
   }, 200);
 }
 
-// Initialize preview box when content script loads
 createPreviewBox();
