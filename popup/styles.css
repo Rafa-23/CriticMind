@@ -1,0 +1,48 @@
+#deepseek-preview {
+    position: fixed;
+    z-index: 999999;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 320px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    font-family: system-ui, sans-serif;
+    pointer-events: none;
+  }
+  
+  .loading-spinner {
+    animation: spin 1s linear infinite;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .popup-container {
+    min-width: 300px;
+    padding: 20px;
+  }
+  
+  .api-key-input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .save-button {
+    background: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
